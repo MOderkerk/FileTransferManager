@@ -11,8 +11,8 @@ cache:
   - $HOME/.m2
   - $HOME/.gradle
 
-before_install:
-   - mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V 
+#before_install:
+#  - mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V 
 
 script:  
   - mvn clean test jacoco:report jacoco:report-aggregate coveralls:report 

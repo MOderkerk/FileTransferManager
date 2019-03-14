@@ -83,6 +83,8 @@
     		<artifactId>spring-boot-starter-test</artifactId>
     		<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+		
 
 	</dependencies>
 
@@ -103,6 +105,42 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.8.2</version>					
+					<executions>
+						<execution>
+							<id>prepare-agent</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.owasp</groupId>
+					<artifactId>dependency-check-maven</artifactId>
+					<version>3.0.2</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>4.3.0</version>
+				<configuration>
+					<repoToken>mn2WKvIRnYkHa4oeSc56gzr4lwAFjvvg2</repoToken>
+					<jacocoReports>
+						<jacocoReport>${project.reporting.outputDirectory}/jacoco-aggregate/jacoco.xml</jacocoReport>
+					</jacocoReports>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

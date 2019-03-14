@@ -11,7 +11,4 @@ cache:
   - $HOME/.m2
   - $HOME/.gradle
 
-
-
-script:  
-  - mvn clean test jacoco:report jacoco:report-aggregate coveralls:report 
+script:  mvn clean test jacoco:report jacoco:report-aggregate coveralls:report 

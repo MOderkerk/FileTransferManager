@@ -3,7 +3,7 @@ language: java
 jdk:
   - openjdk8
 
-sudo: false
+sudo: true
 
 # cache the build tool's caches
 cache:
@@ -11,4 +11,4 @@ cache:
   - $HOME/.m2
   - $HOME/.gradle
 
-script:  mvn clean test jacoco:report jacoco:report-aggregate coveralls:report 
+script:  "mvn clean test jacoco:report jacoco:report-aggregate coveralls:report" 

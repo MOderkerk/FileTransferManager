@@ -1,14 +1,33 @@
 language: java
-# use Java 8
+git:
+  depth: 10
+  quiet: true
+
+cache:
+  directories:
+    - $HOME/.m2
+
+before_install:
+  - unset _JAVA_OPTIONS
+  - rm ~/.m2/settings.xml
+  - export MAVEN_SKIP_RC=true
+  - export MAVEN_OPTS="-Xmn64M -Xmx512M -XX:CompressedClassSpaceSize=96M"
+  - export JAVA_OPTS="$JAVA_OPTS -XX:CompressedClassSpaceSize=96M"
+
+before_script:
+  - unset GEM_PATH GEM_HOME IRBRC JRUBY_OPTS
+  - unset _JAVA_OPTIONS # travis/travis#8408
+  - export PATH="`pwd`/bin:$PATH"
+  - echo $HOME
+  - echo $JAVA_OPTS
+  - echo $MAVEN_OPTS
+
 jdk:
   - openjdk8
 
-sudo: true
+os:
+  - linux
 
-# cache the build tool's caches
-cache:
-  directories:
-  - $HOME/.m2
-  - $HOME/.gradle
 
-script:  "mvn clean test jacoco:report jacoco:report-aggregate coveralls:report" 
+script:  
+  - ./mvnw clean install jacoco:report jacoco:report-aggregate coveralls:report

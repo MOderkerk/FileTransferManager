@@ -1,5 +1,17 @@
-{"properties": [{
-  "name": "de.oderkerk.tools.uploadfolder",
-  "type": "java.lang.String",
-  "description": "Target folder for uploading files"
-}]}
+{"properties": [
+  {
+    "name": "de.oderkerk.tools.uploadfolder",
+    "type": "java.lang.String",
+    "description": "Target folder for uploading files"
+  },
+  {
+    "name": "de.oderkerk.tools.downloadfolder",
+    "type": "java.lang.String",
+    "description": "source folder for all download operations"
+  },
+  {
+    "name": "de.oderkerk.tools.replaceExistingFile",
+    "type": "java.lang.Boolean",
+    "description": "Flag wheter a existing file should be automatic replaced (true) or not (false)"
+  }
+]}

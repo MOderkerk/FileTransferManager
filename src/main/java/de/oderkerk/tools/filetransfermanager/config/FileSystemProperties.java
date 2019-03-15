@@ -4,6 +4,7 @@
 package de.oderkerk.tools.filetransfermanager.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Configuration
 @ConfigurationProperties(prefix = "de.oderkerk.tools")
+@RefreshScope
 public class FileSystemProperties {
 	private String uploadfolder;
 	private String downloadfolder;

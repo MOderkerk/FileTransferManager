@@ -1,2 +1,2 @@
-# FileTransferManager  [![Build Status](https://travis-ci.org/MOderkerk/FileTransferManager.svg?branch=master)](https://travis-ci.org/MOderkerk/FileTransferManager)
+# FileTransferManager  [![Build Status](https://travis-ci.org/MOderkerk/FileTransferManager.svg?branch=master)](https://travis-ci.org/MOderkerk/FileTransferManager) [![Coverage Status](https://coveralls.io/repos/github/MOderkerk/FileTransferManager/badge.svg?branch=master)](https://coveralls.io/github/MOderkerk/FileTransferManager?branch=master)
 Tool zum Transferrieren von Daten , wenn kein FTP oder ähnliches zur Verfügung steht

@@ -3,8 +3,8 @@
 Simple Spring Boot Application to up and download files using rest.
 
 __Open Tasks__
-1. finish IT tests
-2. create api doc
+
+1. create api doc
    
 
 ## How to use 

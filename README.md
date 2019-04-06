@@ -2,6 +2,11 @@
 
 Simple Spring Boot Application to up and download files using rest.
 
+__Open Tasks__
+1. finish IT tests
+2. create api doc
+   
+
 ## How to use 
 Install the application on a server of your choise having java 8 installed.
 
@@ -49,6 +54,7 @@ security.jwt.secret=qwertyuiopasdfghjklzxcvbnm123456
 
 ```
 the following parameters are for customization purpose
+
 __Filestorage settings__
 
  parameter | purpose| example

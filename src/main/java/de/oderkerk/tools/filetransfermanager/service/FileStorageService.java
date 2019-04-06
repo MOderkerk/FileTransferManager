@@ -5,7 +5,6 @@ package de.oderkerk.tools.filetransfermanager.service;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,19 +45,23 @@ public class FileStorageService implements Serializable {
 	 */
 	@Autowired(required = true)
 	public FileStorageService(FileSystemProperties filesystemProperties) {
-
-		this.centralFileUploadLocation = Paths.get(filesystemProperties.getUploadfolder()).toAbsolutePath().normalize();
-		this.centralFileDownloadLocation = Paths.get(filesystemProperties.getDownloadfolder()).toAbsolutePath()
-				.normalize();
-		this.replaceExistingFiles = filesystemProperties.isReplaceExistingFile();
-
 		try {
-			Files.createDirectories(this.centralFileUploadLocation);
-			Files.createDirectories(this.centralFileDownloadLocation);
+			this.centralFileUploadLocation = Paths.get(filesystemProperties.getUploadfolder()).toAbsolutePath()
+					.normalize();
+			this.centralFileDownloadLocation = Paths.get(filesystemProperties.getDownloadfolder()).toAbsolutePath()
+					.normalize();
+			this.replaceExistingFiles = filesystemProperties.isReplaceExistingFile();
+
+			createFS();
 		} catch (Exception ex) {
 			throw new FileStorageException("Could not create the directory where the uploaded files will be stored.",
 					ex);
 		}
+	}
+
+	protected void createFS() throws IOException {
+		Files.createDirectories(this.centralFileUploadLocation);
+		Files.createDirectories(this.centralFileDownloadLocation);
 	}
 
 	/**
@@ -78,15 +81,20 @@ public class FileStorageService implements Serializable {
 				throw new FileStorageException(
 						"Filename contains invalid path sequence .. Due to security reasons this is not allowed");
 			}
-			Path targetLocation = this.centralFileUploadLocation.resolve(fileName);
-			if (replaceExistingFiles) {
-				Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-			} else {
-				Files.copy(file.getInputStream(), targetLocation);
-			}
+
+			copyFile(file, fileName);
 			return fileName;
 		} catch (IOException ex) {
 			throw new FileStorageException("Could not store file. " + fileName, ex);
+		}
+	}
+
+	protected void copyFile(MultipartFile file, String fileName) throws IOException {
+		Path targetLocation = this.centralFileUploadLocation.resolve(fileName);
+		if (replaceExistingFiles) {
+			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+		} else {
+			Files.copy(file.getInputStream(), targetLocation);
 		}
 	}
 
@@ -99,7 +107,7 @@ public class FileStorageService implements Serializable {
 			} else {
 				throw new CustomFileNotFoundException("File not found " + fileName);
 			}
-		} catch (MalformedURLException ex) {
+		} catch (Exception ex) {
 			throw new CustomFileNotFoundException("File not found " + fileName, ex);
 		}
 	}

@@ -1,5 +1,8 @@
 package de.oderkerk.tools.filetransfermanager.controller.upload;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class FileUploadResponse {
 
 	private boolean uploadSuccessfull;
@@ -8,6 +11,8 @@ public class FileUploadResponse {
 	private String fileType;
 	private long size;
 
+	private static final Logger logger = LogManager.getLogger(FileUploadResponse.class);
+
 	public FileUploadResponse(boolean uploadSuccessfull, String fileName, String fileDownloadUri, String fileType,
 			long size) {
 		this.fileName = fileName;
@@ -15,6 +20,12 @@ public class FileUploadResponse {
 		this.fileType = fileType;
 		this.size = size;
 		this.uploadSuccessfull = uploadSuccessfull;
+		if (logger.isDebugEnabled())
+			logger.debug(toString());
+	}
+
+	public FileUploadResponse() {
+
 	}
 
 	/**

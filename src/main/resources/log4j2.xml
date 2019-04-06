@@ -25,13 +25,15 @@
     <Loggers>
         <Logger name="de.oderkerk.tools" level="debug" additivity="false">
             <AppenderRef ref="FileAppender" />
+            <AppenderRef ref="ConsoleAppender" />
         </Logger>
         <Logger name="EventLogger" >
             <AppenderRef ref="ConsoleAppender" />
             <AppenderRef ref="FileAppender" />
         </Logger>       
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="FileAppender" />
+             <AppenderRef ref="ConsoleAppender" />
         </Root>       
     </Loggers>
 </Configuration>

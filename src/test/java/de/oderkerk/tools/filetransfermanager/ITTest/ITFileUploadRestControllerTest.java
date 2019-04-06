@@ -4,7 +4,9 @@
 package de.oderkerk.tools.filetransfermanager.ITTest;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,6 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import de.oderkerk.tools.filetransfermanager.controller.upload.FileUploadResponse;
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
+import io.restassured.response.Response;
 
 /**
  * @author Odin
@@ -71,8 +74,50 @@ public class ITFileUploadRestControllerTest {
 		buf.flush();
 		buf.close();
 
-		FileUploadResponse result = given().multiPart(f).when().post("/uploadFile").as(FileUploadResponse.class);
-		assertTrue(result.isUploadSuccessfull());
+		Response resultResponse = given().header("Authorization",
+				"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NTQ1MzAwNjcsImV4cCI6NDA3OTA1MTY2NywiYXVkIjoid3d3Lm9kZXJrZXJrLmRlIiwic3ViIjoidGVzdHVzZXIiLCJSb2xlIjoiTWFuYWdlciIsImF1dGhvcml0aWVzIjoiYWRtaW4sZmlsZXVwbG9hZCxmaWxlZG93bmxvYWQifQ.DYeTuUephWJ2CjWdhMPzek5Vn2bqoQGaks_u8J6qXWQ")
+				.multiPart(f).when().log().all().post("/uploadFile");
+		assertEquals(200, resultResponse.getStatusCode());
+		try {
+			FileUploadResponse result = resultResponse.as(FileUploadResponse.class);
+			assertTrue(result.isUploadSuccessfull());
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+	}
+
+	@Test
+	public void testUploadExpiredTokenError() throws Exception {
+		File f = new File("target/download/downloadtest.txt");
+		if (!f.exists())
+			f.createNewFile();
+		BufferedWriter buf = new BufferedWriter(new FileWriter(f));
+		buf.write("Test");
+		buf.flush();
+		buf.close();
+
+		Response resultResponse = given().header("Authorization",
+				"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NTQ1MzAwNjcsImV4cCI6MTUyMjkwNzY2NywiYXVkIjoid3d3Lm9kZXJrZXJrLmRlIiwic3ViIjoidGVzdHVzZXIiLCJSb2xlIjoiTWFuYWdlciIsImF1dGhvcml0aWVzIjoiYWRtaW4sZmlsZXVwbG9hZCxmaWxlZG93bmxvYWQifQ.BGlkt55UYRA5rbDBjq6kLXtSzz3ptnhObWMirSY5pxM")
+				.multiPart(f).when().log().all().post("/uploadFile");
+		assertEquals(401, resultResponse.getStatusCode());
+
+	}
+
+	@Test
+	public void testUploadNotAuthorized() throws Exception {
+		File f = new File("target/download/downloadtest.txt");
+		if (!f.exists())
+			f.createNewFile();
+		BufferedWriter buf = new BufferedWriter(new FileWriter(f));
+		buf.write("Test");
+		buf.flush();
+		buf.close();
+
+		Response resultResponse = given().header("Authorization",
+				"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NTQ1MzAwNjcsImV4cCI6NDA3OTA1MTY2NywiYXVkIjoid3d3Lm9kZXJrZXJrLmRlIiwic3ViIjoidGVzdHVzZXIiLCJSb2xlIjoiTWFuYWdlciIsImF1dGhvcml0aWVzIjoidXNlciJ9.GB6wZ67gnTEE9_1Re3LQaKrK-zbqycro0ufXWQEHtgI")
+				.multiPart(f).when().log().all().post("/uploadFile");
+		assertEquals(403, resultResponse.getStatusCode());
 
 	}
 

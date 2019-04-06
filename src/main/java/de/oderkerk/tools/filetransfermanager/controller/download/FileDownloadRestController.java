@@ -56,9 +56,10 @@ public class FileDownloadRestController implements Serializable {
 		try {
 			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
 		} catch (IOException ex) {
-			logger.info("Could not determine file type.");
+			logger.error("Could not determine file type.");
 		}
-
+		if (logger.isDebugEnabled())
+			logger.debug("contentType {}", contentType);
 		// Fallback to the default content type if type could not be determined
 		if (contentType == null) {
 			contentType = "application/octet-stream";

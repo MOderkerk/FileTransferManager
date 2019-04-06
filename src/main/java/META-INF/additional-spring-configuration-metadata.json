@@ -13,5 +13,10 @@
     "name": "de.oderkerk.tools.replaceExistingFile",
     "type": "java.lang.Boolean",
     "description": "Flag wheter a existing file should be automatic replaced (true) or not (false)"
+  },
+  {
+    "name": "security.jwt.secret",
+    "type": "java.lang.String",
+    "description": "Secret key for jwt token'"
   }
 ]}

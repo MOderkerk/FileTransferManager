@@ -73,4 +73,18 @@ public class FileDownloadRestControllerTest {
 		}
 	}
 
+	@Test
+	public void testDownloadFileSwitchToOctetStream() {
+		try {
+			File f = new File("target/download/downloadtest.xxxxxx");
+			if (!f.exists())
+				f.createNewFile();
+			req = new MockHttpServletRequest("/downloadFile/downloadtest.xxxxxx", "/");
+			ResponseEntity<Resource> result = fileDownloadRestController.downloadFile("downloadtest.xxxxxx", req);
+			assertEquals(HttpStatus.OK, result.getStatusCode());
+		} catch (Exception ex) {
+			fail(ex.toString());
+		}
+	}
+
 }

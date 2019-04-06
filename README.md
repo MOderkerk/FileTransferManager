@@ -9,7 +9,7 @@ Install the application on a server of your choise having java 8 installed.
 
 here is an example of a valid application properties file:
 
-´´´
+```
 # ----------------------------------------
 # CORE PROPERTIES
 # ----------------------------------------
@@ -47,7 +47,7 @@ spring.cloud.config.uri=http://localhost:8888
 security.jwt.secret=qwertyuiopasdfghjklzxcvbnm123456
 
 
-´´´
+```
 the following parameters are for customization purpose
 __Filestorage settings__
 
@@ -69,7 +69,7 @@ security.jwt.secret|Secret for the Jwt Token| JwtSecretKey
 ##Example requests
 
 __To Upload a File__
-´´´
+```
 Request method: POST
 Request URI:    http://localhost:57277/uploadFile
 Proxy:          <none>
@@ -87,12 +87,13 @@ Multiparts:     ------------
 
                 target\download\downloadtest.txt
 Body:           <none>
-´´´
+```
 
 __Download a file__
-
+```
 Request method: GET
 ... tbd
+```
 
 
 

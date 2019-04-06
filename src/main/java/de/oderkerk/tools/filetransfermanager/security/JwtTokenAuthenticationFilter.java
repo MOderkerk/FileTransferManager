@@ -47,10 +47,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 		if (logger.isDebugEnabled())
 			logger.debug("Header found : {}", header.substring(0, 20));
 		if (header == null || !header.startsWith(jwtConfig.getPrefix())) {
-			if (logger.isDebugEnabled())
-				logger.debug("No header found ");
 			chain.doFilter(request, response);
-
 			return;
 		}
 
@@ -65,8 +62,6 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 				logger.debug("username found : {}", username);
 
 			if (username != null) {
-				@SuppressWarnings("unchecked")
-				// List<String> authorities = (List<String>) claims.get("authorities");
 				String[] tempAuthorities = ((String) claims.get("authorities")).split(",");
 				List<String> authorities = new ArrayList<String>();
 				for (String tauth : tempAuthorities) {

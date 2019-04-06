@@ -44,8 +44,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 
 		String header = request.getHeader(jwtConfig.getHeader());
-		if (logger.isDebugEnabled())
-			logger.debug("Header found : {}", header.substring(0, 20));
+
 		if (header == null || !header.startsWith(jwtConfig.getPrefix())) {
 			chain.doFilter(request, response);
 			return;

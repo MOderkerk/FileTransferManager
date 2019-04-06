@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.oderkerk.tools.filetransfermanager.service.FileStorageService;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 
 /**
  * Restcontroller for filedownloads
@@ -28,6 +31,7 @@ import de.oderkerk.tools.filetransfermanager.service.FileStorageService;
  *
  */
 @RestController
+@ApiModel(description = "Controller for FileDownloadRestController")
 public class FileDownloadRestController implements Serializable {
 
 	/**
@@ -46,6 +50,8 @@ public class FileDownloadRestController implements Serializable {
 	 * @return Responseentity
 	 */
 	@GetMapping("/downloadFile/{fileName:.+}")
+	@ApiOperation("downloadFile to download a file")
+	@Authorization(value = "Bearer")
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
 		if (logger.isDebugEnabled())
 			logger.debug("Start download file ", fileName);

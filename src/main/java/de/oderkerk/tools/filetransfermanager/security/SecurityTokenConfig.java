@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -42,10 +43,13 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 				// .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
 				// must be an admin if trying to access admin area (authentication is also
 				// required here)
-				.antMatchers("/uploadFile").hasAuthority("fileupload").antMatchers("/downloadFile/**")
-				.hasAuthority("filedownload")
+				.antMatchers(HttpMethod.GET, "/").permitAll().antMatchers(HttpMethod.GET, "/csrf/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/sw**").permitAll().antMatchers(HttpMethod.GET, "/webjars/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/v2/api-docs/**").permitAll().antMatchers("/swagger-resources/**")
+				.permitAll().antMatchers("/uploadFile").hasAuthority("fileupload")
+				.antMatchers(HttpMethod.GET, "/downloadFile/**").hasAuthority("filedownload")
 				// Any other request must be authenticated
-				.anyRequest().hasAnyAuthority("admin")
+				.anyRequest().authenticated()
 		// .anyRequest().authenticated()
 		;
 	}

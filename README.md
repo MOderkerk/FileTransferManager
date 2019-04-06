@@ -2,11 +2,6 @@
 
 Simple Spring Boot Application to up and download files using rest.
 
-__Open Tasks__
-
-1. create api doc
-   
-
 ## How to use 
 Install the application on a server of your choise having java 8 installed.
 

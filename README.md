@@ -69,7 +69,9 @@ security.jwt.secret|Secret for the Jwt Token| JwtSecretKey
 ##Example requests
 
 __To Upload a File__
+
 ```
+
 Request method: POST
 Request URI:    http://localhost:57277/uploadFile
 Proxy:          <none>
@@ -87,12 +89,15 @@ Multiparts:     ------------
 
                 target\download\downloadtest.txt
 Body:           <none>
+
 ```
 
 __Download a file__
 ```
+
 Request method: GET
 ... tbd
+
 ```
 
 

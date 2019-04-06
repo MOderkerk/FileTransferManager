@@ -23,7 +23,7 @@
     </Appenders>
     
     <Loggers>
-        <Logger name="de.oderkerk.tools" level="error" additivity="false">
+        <Logger name="de.oderkerk.tools" level="debug" additivity="false">
             <AppenderRef ref="FileAppender" />
             <!-- <AppenderRef ref="ConsoleAppender" />-->
         </Logger>

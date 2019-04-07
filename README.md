@@ -67,7 +67,7 @@ security.jwt.prefix|Value of the Jwt Token prefix set if not Bearer | Bearer
 security.jwt.secret|Secret for the Jwt Token| JwtSecretKey
 
 
-##Example requests
+## Example requests
 
 __To Upload a File__
 
@@ -97,7 +97,17 @@ __Download a file__
 ```
 
 Request method: GET
-... tbd
+Request URI:    http://localhost:51490/downloadFile/downloadtest.txt
+Proxy:          <none>
+Request params: <none>
+Query params:   <none>
+Form params:    <none>
+Path params:    <none>
+Headers:        Authorization=Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NTQ1MzAwNjcsImV4cCI6NDA3OTA1MTY2NywiYXVkIjoid3d3Lm9kZXJrZXJrLmRlIiwic3ViIjoidGVzdHVzZXIiLCJSb2xlIjoiTWFuYWdlciIsImF1dGhvcml0aWVzIjoiYWRtaW4sZmlsZXVwbG9hZCxmaWxlZG93bmxvYWQifQ.DYeTuUephWJ2CjWdhMPzek5Vn2bqoQGaks_u8J6qXWQ
+                Accept=*/*
+Cookies:        <none>
+Multiparts:     <none>
+Body:           <none>
 
 ```
 

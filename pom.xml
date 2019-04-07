@@ -119,10 +119,10 @@
 			<version>2.9.2</version>
 			<exclusions>
 				<exclusion>
-					<dependency>
+					
 						<groupId>com.google.guava</groupId>
 						<artifactId>guava-gwt</artifactId>
-					</dependency>
+					
 				</exclusion>
 			</exclusions>
 		</dependency>

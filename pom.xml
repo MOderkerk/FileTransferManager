@@ -117,14 +117,20 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
+			<exclusions>
+				<exclusion>
+					<dependency>
+						<groupId>com.google.guava</groupId>
+						<artifactId>guava-gwt</artifactId>
+					</dependency>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
-
-
-
-
-
-
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava-gwt</artifactId>
+			<version>27.1-jre</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

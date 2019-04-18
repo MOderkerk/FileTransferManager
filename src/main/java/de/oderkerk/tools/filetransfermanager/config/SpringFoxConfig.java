@@ -41,9 +41,10 @@ public class SpringFoxConfig {
 	public Docket apiDocket() {
 		List<SecurityScheme> schemeList = new ArrayList<>();
 		schemeList.add(new ApiKey("Bearer", "Authorization", "header"));
-		return new Docket(DocumentationType.SWAGGER_2).securitySchemes(schemeList)
-				.securityContexts(Lists.newArrayList(securityContext())).select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.any()).build().apiInfo(getApiInfo());
+		List<SecurityContext> seccontext = new ArrayList<SecurityContext>();
+		seccontext.add(securityContext());
+		return new Docket(DocumentationType.SWAGGER_2).securitySchemes(schemeList).securityContexts(seccontext).select()
+				.apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build().apiInfo(getApiInfo());
 	}
 
 	private ApiInfo getApiInfo() {

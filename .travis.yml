@@ -1,11 +1,23 @@
+stages:
+  - analyze
+  - compile
+  
 sudo: false
 language: java
-jdk:
-  - oraclejdk8
-  - openjdk8
 install: true
 cache:
   directories:
     - $HOME/.m2
 script: mvn clean install jacoco:report jacoco:report-aggregate coveralls:report
+jobs:
+  include:
+    - stage: analyze 
+      jdk: oraclejdk8  
+      script: mvn clean verify -Dmaven.test.skip
+    - stage: compile  
+      jdk:
+        - oraclejdk8
+        - openjdk8  
+      script: mvn clean test jacoco:report jacoco:report-aggregate coveralls:report -Ddependency-check.skip=true
+    
         
